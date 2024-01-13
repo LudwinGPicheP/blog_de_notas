@@ -1,18 +1,23 @@
 package modelo;
 
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
- * Clase que gestiona las operaciones relacionadas con las notas en la base de datos MongoDB.
- * 
+ * Clase que gestiona las operaciones relacionadas con las notas en la base de
+ * datos MongoDB.
+ *
  * @author mond
  */
 public class NotaModel {
 
+    MongoClient mongoClient = MongoClients.create("mongodb+srv://giancsrlopichepsz:UvmnCIUT6dOvC7BC@clusterdemoluna.8gzlwdk.mongodb.net/");
+    MongoDatabase database = mongoClient.getDatabase("gestor_de_notas");
     private MongoCollection<Document> notaCollection;
 
     /**
@@ -20,8 +25,8 @@ public class NotaModel {
      *
      * @param database Base de datos MongoDB a la que se conectará.
      */
-    public NotaModel(MongoDatabase database) {
-        this.notaCollection = database.getCollection("nota");
+    public NotaModel() {
+        this.notaCollection = this.database.getCollection("nota");
     }
 
     /**
@@ -58,13 +63,13 @@ public class NotaModel {
     /**
      * Actualiza una nota existente en la base de datos.
      *
-     * @param id   Identificador único de la nota que se actualizará.
+     * @param id Identificador único de la nota que se actualizará.
      * @param nota La nueva información de la nota.
      */
     public void actualizarNota(ObjectId id, Nota nota) {
         Document updateDoc = new Document("$set", new Document("titulo", nota.getTitulo())
                 .append("contenido", nota.getContenido()));
-        notaCollection.updateOne(new Document("_id",id),updateDoc);
+        notaCollection.updateOne(new Document("_id", id), updateDoc);
     }
 
     /**
@@ -72,7 +77,7 @@ public class NotaModel {
      *
      * @param id Identificador único de la nota que se eliminará.
      */
-    public void eliminarNota(ObjectId id){
-        notaCollection.deleteOne(new Document("_id",id));
+    public void eliminarNota(ObjectId id) {
+        notaCollection.deleteOne(new Document("_id", id));
     }
 }

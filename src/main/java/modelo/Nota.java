@@ -26,6 +26,9 @@ public class Nota {
         this.contenido = contenido;
         this.fecha_creacion = getCurrentDate();
     }
+    public Nota(){
+        
+    }
 
     /**
      * Obtiene el identificador único de la nota.

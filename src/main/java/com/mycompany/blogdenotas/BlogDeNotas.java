@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.blogdenotas;
+
+import vista.NotaVista;
 
 /**
  *
@@ -11,6 +9,8 @@ package com.mycompany.blogdenotas;
 public class BlogDeNotas {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        NotaVista ventanaPrincipal = new NotaVista();
+        ventanaPrincipal.setVisible(true);
+
     }
 }
